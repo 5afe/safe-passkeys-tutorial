@@ -1,95 +1,80 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
 
-export default function Home() {
+import { useState } from 'react'
+import { Safe4337Pack } from '@safe-global/relay-kit'
+import { PasskeyArgType } from '@safe-global/protocol-kit'
+
+import PasskeyList from '../components/PasskeyList'
+import { executeUSDCTransfer } from '../lib/usdc'
+import { getPasskeyFromRawId } from '../lib/passkeys'
+import { BUNDLER_URL, RPC_URL } from '../lib/constants'
+import { bufferToString } from '../lib/utils'
+
+function Create4337SafeAccount () {
+  const [selectedPasskey, setSelectedPasskey] = useState<PasskeyArgType>()
+  const [safeAddress, setSafeAddress] = useState<string>()
+  const [isSafeDeployed, setIsSafeDeployed] = useState<boolean>()
+
+  const selectPasskeySigner = async (rawId: string) => {
+    console.log('selected passkey signer: ', rawId)
+
+    const passkey = await getPasskeyFromRawId(rawId)
+
+    const safe4337Pack = await Safe4337Pack.init({
+      provider: RPC_URL,
+      rpcUrl: RPC_URL,
+      signer: passkey,
+      bundlerUrl: BUNDLER_URL,
+      options: {
+        owners: [],
+        threshold: 1
+      }
+    })
+
+    const safeAddress = await safe4337Pack.protocolKit.getAddress()
+    const isSafeDeployed = await safe4337Pack.protocolKit.isSafeDeployed()
+
+    setSelectedPasskey(passkey)
+    setSafeAddress(safeAddress)
+    setIsSafeDeployed(isSafeDeployed)
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
+    <div>
+      <h1>Safe Account 4337 compatible</h1>
+
+      <p>Create a new Safe Account 4337 compatible using passkeys</p>
+
+      {selectedPasskey && (
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <h2>Passkey Selected</h2>
+
+          <p>{bufferToString(selectedPasskey.rawId)}</p>
         </div>
-      </div>
+      )}
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      {safeAddress && (
+        <div>
+          <h2>Safe Account</h2>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          <p>Address: {safeAddress}</p>
+          <p>Is deployed?: {isSafeDeployed ? 'Yes' : 'No'}</p>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+          {selectedPasskey && (
+            <button
+              onClick={() =>
+                executeUSDCTransfer({ signer: selectedPasskey, safeAddress })
+              }
+            >
+              Execute USDC Transfers
+            </button>
+          )}
+        </div>
+      )}
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+      <PasskeyList selectPasskeySigner={selectPasskeySigner} />
+    </div>
+  )
 }
+
+export default Create4337SafeAccount
