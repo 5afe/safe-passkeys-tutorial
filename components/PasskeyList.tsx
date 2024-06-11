@@ -30,24 +30,19 @@ function PasskeyList ({ selectPasskeySigner }: Props) {
   }, [])
 
   return (
-    <div>
+    <>
       <h2>Passkey List</h2>
-      <ul>
-        {passkeyList?.map(passkey => (
-          <li
-            key={passkey.rawId}
-            style={{ textAlign: 'start', margin: '12px 0px' }}
-          >
-            Id: {passkey.rawId}{' '}
-            <button onClick={() => selectPasskeySigner(passkey.rawId)}>
-              select
-            </button>
-          </li>
-        ))}
-      </ul>
+      {passkeyList?.map(passkey => (
+        <div style={{ maxWidth: '100%' }} key={passkey.rawId}>
+          Id: {passkey.rawId}{' '}
+          <button onClick={() => selectPasskeySigner(passkey.rawId)}>
+            select
+          </button>
+        </div>
+      ))}
       <h3>Create new Passkey</h3>
       <button onClick={handleSubmit}>Add New Passkey</button>{' '}
-    </div>
+    </>
   )
 }
 
