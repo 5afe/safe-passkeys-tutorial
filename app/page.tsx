@@ -2,11 +2,10 @@
 
 import { useState } from 'react'
 import { Safe4337Pack } from '@safe-global/relay-kit'
-import { PasskeyArgType } from '@safe-global/protocol-kit'
 
 import PasskeyList from '../components/PasskeyList'
 import { executeUSDCTransfer } from '../lib/usdc'
-import { getPasskeyFromRawId } from '../lib/passkeys'
+import { getPasskeyFromRawId, type PasskeyArgType } from '../lib/passkeys'
 import { BUNDLER_URL, RPC_URL } from '../lib/constants'
 import { bufferToString } from '../lib/utils'
 

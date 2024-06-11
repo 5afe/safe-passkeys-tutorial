@@ -1,8 +1,10 @@
-import { PasskeyArgType } from '@safe-global/protocol-kit'
-
 import { STORAGE_PASSKEY_LIST_KEY } from './constants'
 import { bufferToString, hexStringToUint8Array } from './utils'
 
+export type PasskeyArgType = {
+  rawId: ArrayBuffer
+  publicKey: ArrayBuffer
+}
 export type PasskeyItemType = { rawId: string; publicKey: string }
 
 export async function createPasskey (): Promise<PasskeyArgType> {

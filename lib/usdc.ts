@@ -1,7 +1,7 @@
 import { encodeFunctionData } from 'viem'
 import { Safe4337Pack } from '@safe-global/relay-kit'
-import { PasskeyArgType } from '@safe-global/protocol-kit'
 
+import { type PasskeyArgType } from './passkeys'
 import {
   BUNDLER_URL,
   CHAIN_NAME,
