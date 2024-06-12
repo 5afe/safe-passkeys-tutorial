@@ -10,7 +10,6 @@ Before progressing with the tutorial, please make sure you have:
 
 - Downloaded and installed [Node.js](https://nodejs.org/en/download/package-manager) and [pnpm](https://pnpm.io/installation).
 - Created an API key from [Pimlico](https://www.pimlico.io/).
-- (Optional) [USDC](https://faucet.circle.com/) on Ethereum Sepolia.
 
 
 ## Getting Started
