@@ -44,5 +44,3 @@ Please post any questions on [Stack Exchange](https://ethereum.stackexchange.com
 ## License
 
 MIT, see [LICENSE](LICENSE).
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
