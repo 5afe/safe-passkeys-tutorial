@@ -1,10 +1,10 @@
 # How to build an app with Safe and passkeys
 
-This example app shows how to create a web app for using passkeys in your Safe. Please read [How to build an app with Safe and passkeys]() to see how this app was created.
+This example app shows how to create a web app for using passkeys in your Safe. Please read [How to build an app with Safe and passkeys](https://docs.safe.global/home/passkeys-tutorials/safe-passkeys-tutorial) to see how this app was created.
 
 ## What you’ll need
 
-**Prerequisite knowledge:** You will need some basic experience with [React](https://react.dev/learn), [Next.js](https://nextjs.org/docs), and [ERC-4337]().
+**Prerequisite knowledge:** You will need some basic experience with [React](https://react.dev/learn), [Next.js](https://nextjs.org/docs), and [ERC-4337](https://docs.safe.global/home/4337-overview).
 
 Before progressing with the tutorial, please make sure you have:
 
