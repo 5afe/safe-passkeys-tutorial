@@ -56,8 +56,8 @@ export async function createPasskey (): Promise<PasskeyArgType> {
   }
 }
 
-export function storePasskey (passkey: PasskeyArgType) {
-  const passkeys = loadPasskeys()
+export function storePasskeyInLocalStorage (passkey: PasskeyArgType) {
+  const passkeys = loadPasskeysFromLocalStorage()
 
   const newPasskeyItem = {
     rawId: bufferToString(passkey.rawId),
@@ -69,7 +69,7 @@ export function storePasskey (passkey: PasskeyArgType) {
   localStorage.setItem(STORAGE_PASSKEY_LIST_KEY, JSON.stringify(passkeys))
 }
 
-export function loadPasskeys (): PasskeyItemType[] {
+export function loadPasskeysFromLocalStorage (): PasskeyItemType[] {
   const passkeysStored = localStorage.getItem(STORAGE_PASSKEY_LIST_KEY)
 
   const passkeyIds = passkeysStored ? JSON.parse(passkeysStored) : []
@@ -78,7 +78,7 @@ export function loadPasskeys (): PasskeyItemType[] {
 }
 
 function getPublicKeyFromLocalStorage (passkeyRawId: string): ArrayBuffer {
-  const passkeys = loadPasskeys()
+  const passkeys = loadPasskeysFromLocalStorage()
 
   const { publicKey } = passkeys.find(
     (passkey: PasskeyItemType) => passkey.rawId === passkeyRawId

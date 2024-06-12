@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 import {
   createPasskey,
-  loadPasskeys,
-  storePasskey,
+  loadPasskeysFromLocalStorage,
+  storePasskeyInLocalStorage,
   type PasskeyItemType
 } from '../lib/passkeys'
 
@@ -16,12 +16,12 @@ function PasskeyList ({ selectPasskeySigner }: Props) {
 
   async function handleSubmit () {
     const passkey = await createPasskey()
-    storePasskey(passkey)
+    storePasskeyInLocalStorage(passkey)
     refreshPasskeyList()
   }
 
   function refreshPasskeyList () {
-    const passkeys = loadPasskeys()
+    const passkeys = loadPasskeysFromLocalStorage()
     setPasskeyList(passkeys)
   }
 

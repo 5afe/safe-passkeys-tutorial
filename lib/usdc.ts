@@ -1,4 +1,4 @@
-import { encodeFunctionData } from 'viem'
+import { encodeFunctionData, parseAbi } from 'viem'
 import { Safe4337Pack } from '@safe-global/relay-kit'
 
 import { type PasskeyArgType } from './passkeys'
@@ -18,32 +18,9 @@ const paymasterOptions = {
 }
 
 const generateTransferCallData = (to: string, value: bigint) => {
+	const abi = parseAbi(["function transfer(address _to, number _value) returns (bool)"]) 
   return encodeFunctionData({
-    abi: [
-      {
-        constant: false,
-        inputs: [
-          {
-            name: '_to',
-            type: 'address'
-          },
-          {
-            name: '_value',
-            type: 'uint256'
-          }
-        ],
-        name: 'transfer',
-        outputs: [
-          {
-            name: '',
-            type: 'bool'
-          }
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function'
-      }
-    ],
+    abi,
     functionName: 'transfer',
     args: [to as `0x${string}`, value]
   })
@@ -74,7 +51,7 @@ export const executeUSDCTransfer = async ({
 
   const transferUSDC = {
     to: usdcTokenAddress,
-    data: generateTransferCallData(safeAddress!, usdcAmount),
+    data: generateTransferCallData(safeAddress, usdcAmount),
     value: '0'
   }
 
