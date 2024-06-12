@@ -18,8 +18,8 @@ Before progressing with the tutorial, please make sure you have:
 To install this example application, run the following commands:
 
 ```bash
-git clone https://github.com/5afe/tutorial-passkeys.git
-cd tutorial-passkeys
+git clone https://github.com/5afe/safe-passkeys-tutorial.git
+cd safe-passkeys-tutorial
 pnpm i
 ```
 
