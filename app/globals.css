@@ -107,6 +107,15 @@ h3 {
   margin-bottom: 10px;
 }
 
+button {
+  cursor: pointer;
+  border: none;
+  background: #00E673;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
