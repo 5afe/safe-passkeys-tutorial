@@ -64,34 +64,12 @@ export default function RootLayout ({
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '70vw'
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            marginLeft: '40px',
+            marginRight: '40px'
           }}
         >
-          <video
-            autoPlay
-            muted
-            playsInline
-            loop
-            style={{
-              width: '90%',
-              position: 'absolute',
-              top: '20%',
-              left: '5%',
-              zIndex: -1
-            }}
-          >
-            <source
-              src='https://safe.global/videos/Home/safe-2024-hero-vp9.webm'
-              type='video/webm'
-            />
-            <source
-              src='https://safe.global/videos/Home/safe-2024-hero-hevc.mov'
-              type='video/quicktime; codecs=hvc1'
-            />
-          </video>
           {children}
         </div>
       </body>

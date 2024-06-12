@@ -40,25 +40,36 @@ function Create4337SafeAccount () {
 
   return (
     <>
-      <h1>Passkeys tutorial</h1>
+      <div
+        style={{
+          width: '50%'
+        }}
+      >
+        <h1>Passkeys tutorial</h1>
 
-      <div>Create a new 4337 compatible Safe Account using passkeys</div>
+        <div>Create a new 4337 compatible Safe Account using passkeys</div>
+        {selectedPasskey && (
+          <>
+            <h2>Passkey Selected</h2>
 
-      {selectedPasskey && (
-        <>
-          <h2>Passkey Selected</h2>
-
-          <div style={{ maxWidth: '100%' }}>
-            {bufferToString(selectedPasskey.rawId)}
-          </div>
-        </>
-      )}
-
+            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {bufferToString(selectedPasskey.rawId)}
+            </div>
+          </>
+        )}
+        <PasskeyList selectPasskeySigner={selectPasskeySigner} />
+      </div>
       {safeAddress && (
-        <>
+        <div
+          style={{
+            width: '50%'
+          }}
+        >
           <h2>Safe Account</h2>
 
-          <div style={{ maxWidth: '100%' }}>Address: {safeAddress}</div>
+          <div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            Address: {safeAddress}
+          </div>
           <div>Is deployed?: {isSafeDeployed ? 'Yes' : 'No'}</div>
 
           {selectedPasskey && (
@@ -70,10 +81,8 @@ function Create4337SafeAccount () {
               Sign transaction with passkey
             </button>
           )}
-        </>
+        </div>
       )}
-
-      <PasskeyList selectPasskeySigner={selectPasskeySigner} />
     </>
   )
 }

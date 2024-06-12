@@ -31,17 +31,20 @@ function PasskeyList ({ selectPasskeySigner }: Props) {
 
   return (
     <>
+      <h3>Create new Passkey</h3>
+      <button onClick={handleSubmit}>Add New Passkey</button>{' '}
       <h2>Passkey List</h2>
       {passkeyList?.map(passkey => (
-        <div style={{ maxWidth: '100%' }} key={passkey.rawId}>
+        <div
+          style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+          key={passkey.rawId}
+        >
           Id: {passkey.rawId}{' '}
           <button onClick={() => selectPasskeySigner(passkey.rawId)}>
-            select
+            Select
           </button>
         </div>
       ))}
-      <h3>Create new Passkey</h3>
-      <button onClick={handleSubmit}>Add New Passkey</button>{' '}
     </>
   )
 }
