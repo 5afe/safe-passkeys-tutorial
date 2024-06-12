@@ -76,7 +76,7 @@ function Create4337SafeAccount () {
             Is deployed?:{' '}
             {isSafeDeployed ? (
               <a
-                href={`https://app.safe.global/home?safe=sep:${safeAddress}`}
+                href={`https://app.safe.global/transactions/history?safe=sep:${safeAddress}`}
                 target='_blank'
                 rel='noreferrer'
               >
