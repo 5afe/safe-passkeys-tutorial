@@ -7,8 +7,13 @@ export type PasskeyArgType = {
 }
 export type PasskeyItemType = { rawId: string; publicKey: string }
 
+/**
+ * Create a passkey using WebAuthn API.
+ * @returns {Promise<PasskeyArgType>} Passkey object with rawId and publicKey.
+ * @throws {Error} If passkey creation fails.
+ */
 export async function createPasskey (): Promise<PasskeyArgType> {
-  const label = 'Safe Owner'
+  const displayName = 'Safe Owner' // This can be customized to match, for example, a user name.
   // Generate a passkey credential using WebAuthn API
   const passkeyCredential = await navigator.credentials.create({
     publicKey: {
@@ -24,9 +29,9 @@ export async function createPasskey (): Promise<PasskeyArgType> {
         name: 'Safe SmartAccount'
       },
       user: {
-        displayName: label,
+        displayName,
         id: crypto.getRandomValues(new Uint8Array(32)),
-        name: label
+        name: displayName
       },
       timeout: 60_000,
       attestation: 'none'
@@ -56,6 +61,10 @@ export async function createPasskey (): Promise<PasskeyArgType> {
   }
 }
 
+/**
+ * Store passkey in local storage.
+ * @param {PasskeyArgType} passkey - Passkey object with rawId and publicKey.
+ */
 export function storePasskeyInLocalStorage (passkey: PasskeyArgType) {
   const passkeys = loadPasskeysFromLocalStorage()
 
@@ -69,6 +78,10 @@ export function storePasskeyInLocalStorage (passkey: PasskeyArgType) {
   localStorage.setItem(STORAGE_PASSKEY_LIST_KEY, JSON.stringify(passkeys))
 }
 
+/**
+ * Load passkeys from local storage.
+ * @returns {PasskeyItemType[]} List of passkeys.
+ */
 export function loadPasskeysFromLocalStorage (): PasskeyItemType[] {
   const passkeysStored = localStorage.getItem(STORAGE_PASSKEY_LIST_KEY)
 
@@ -77,6 +90,11 @@ export function loadPasskeysFromLocalStorage (): PasskeyItemType[] {
   return passkeyIds
 }
 
+/**
+ * Get public key from local storage.
+ * @param {string} passkeyRawId - Raw ID of the passkey.
+ * @returns {ArrayBuffer} Public key.
+ */
 function getPublicKeyFromLocalStorage (passkeyRawId: string): ArrayBuffer {
   const passkeys = loadPasskeysFromLocalStorage()
 
@@ -87,6 +105,11 @@ function getPublicKeyFromLocalStorage (passkeyRawId: string): ArrayBuffer {
   return hexStringToUint8Array(publicKey)
 }
 
+/**
+ * Get passkey from raw ID.
+ * @param {string} passkeyRawId - Raw ID of the passkey.
+ * @returns {Promise<PasskeyArgType>} Passkey object with rawId and publicKey.
+ */
 export async function getPasskeyFromRawId (
   passkeyRawId: string
 ): Promise<PasskeyArgType> {

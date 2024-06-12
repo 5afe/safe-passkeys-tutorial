@@ -17,8 +17,16 @@ const paymasterOptions = {
   paymasterUrl: PAYMASTER_URL
 }
 
+/**
+ * Generate call data for USDC transfer.
+ * @param {string} to - Recipient address.
+ * @param {bigint} value - Amount to transfer.
+ * @returns {string} Call data.
+ */
 const generateTransferCallData = (to: string, value: bigint) => {
-	const abi = parseAbi(["function transfer(address _to, number _value) returns (bool)"]) 
+  const abi = parseAbi([
+    'function transfer(address _to, uint256 _value) returns (bool)'
+  ])
   return encodeFunctionData({
     abi,
     functionName: 'transfer',
@@ -26,6 +34,13 @@ const generateTransferCallData = (to: string, value: bigint) => {
   })
 }
 
+/**
+ * Execute USDC transfer.
+ * @param {PasskeyArgType} signer - Signer object with rawId and publicKey.
+ * @param {string} safeAddress - Safe address.
+ * @returns {Promise<void>}
+ * @throws {Error} If the operation fails.
+ */
 export const executeUSDCTransfer = async ({
   signer,
   safeAddress
@@ -70,7 +85,5 @@ export const executeUSDCTransfer = async ({
     executable: signedSafeOperation
   })
 
-  console.log(
-    `https://jiffyscan.xyz/userOpHash/${userOperationHash}?network=${CHAIN_NAME}`
-  )
+  return userOperationHash
 }
