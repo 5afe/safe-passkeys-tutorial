@@ -39,25 +39,27 @@ function Create4337SafeAccount () {
   }
 
   return (
-    <div>
-      <h1>Safe Account 4337 compatible</h1>
+    <>
+      <h1>Passkeys tutorial</h1>
 
-      <p>Create a new Safe Account 4337 compatible using passkeys</p>
+      <div>Create a new 4337 compatible Safe Account using passkeys</div>
 
       {selectedPasskey && (
-        <div>
+        <>
           <h2>Passkey Selected</h2>
 
-          <p>{bufferToString(selectedPasskey.rawId)}</p>
-        </div>
+          <div style={{ maxWidth: '100%' }}>
+            {bufferToString(selectedPasskey.rawId)}
+          </div>
+        </>
       )}
 
       {safeAddress && (
-        <div>
+        <>
           <h2>Safe Account</h2>
 
-          <p>Address: {safeAddress}</p>
-          <p>Is deployed?: {isSafeDeployed ? 'Yes' : 'No'}</p>
+          <div style={{ maxWidth: '100%' }}>Address: {safeAddress}</div>
+          <div>Is deployed?: {isSafeDeployed ? 'Yes' : 'No'}</div>
 
           {selectedPasskey && (
             <button
@@ -65,14 +67,14 @@ function Create4337SafeAccount () {
                 executeUSDCTransfer({ signer: selectedPasskey, safeAddress })
               }
             >
-              Execute USDC Transfers
+              Sign transaction with passkey
             </button>
           )}
-        </div>
+        </>
       )}
 
       <PasskeyList selectPasskeySigner={selectPasskeySigner} />
-    </div>
+    </>
   )
 }
 
