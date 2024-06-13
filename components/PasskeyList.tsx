@@ -12,7 +12,7 @@ type Props = {
 }
 
 function PasskeyList ({ selectPasskeySigner }: Props) {
-  const [passkeyList, setPasskeyList] = useState<PasskeyItemType[]>()
+  const [passkeyList, setPasskeyList] = useState<PasskeyItemType[]>([])
 
   async function handleSubmit () {
     const passkey = await createPasskey()
@@ -33,18 +33,22 @@ function PasskeyList ({ selectPasskeySigner }: Props) {
     <>
       <h3>Create new Passkey</h3>
       <button onClick={handleSubmit}>Add New Passkey</button>{' '}
-      <h2>Passkey List</h2>
-      {passkeyList?.map(passkey => (
-        <div
-          style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
-          key={passkey.rawId}
-        >
-          Id: {passkey.rawId}{' '}
-          <button onClick={() => selectPasskeySigner(passkey.rawId)}>
-            Select
-          </button>
-        </div>
-      ))}
+      {passkeyList.length > 0 && (
+        <>
+          <h2>Passkey List</h2>
+          {passkeyList.map(passkey => (
+            <div
+              style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+              key={passkey.rawId}
+            >
+              Id: {passkey.rawId}{' '}
+              <button onClick={() => selectPasskeySigner(passkey.rawId)}>
+                Select
+              </button>
+            </div>
+          ))}
+        </>
+      )}
     </>
   )
 }

@@ -47,9 +47,6 @@ function Create4337SafeAccount () {
           width: '50%'
         }}
       >
-        <h1>Passkeys tutorial</h1>
-
-        <div>Create a new 4337 compatible Safe Account using passkeys</div>
         {selectedPasskey && (
           <>
             <h2>Passkey Selected</h2>

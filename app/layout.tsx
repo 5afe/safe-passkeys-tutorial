@@ -30,7 +30,7 @@ export default function RootLayout ({
           </a>
           <div style={{ display: 'flex' }}>
             <a
-              href='https://docs.safe.global/home/passkeys-tutorial'
+              href='https://docs.safe.global/home/passkeys-tutorials/safe-passkeys-tutorial'
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -61,6 +61,11 @@ export default function RootLayout ({
             </a>
           </div>
         </nav>
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          <h1>Passkeys tutorial</h1>
+
+          <div>Create a new 4337 compatible Safe Account using passkeys</div>
+        </div>
         <div
           style={{
             display: 'flex',
