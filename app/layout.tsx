@@ -47,7 +47,7 @@ export default function RootLayout ({
               />
             </a>
             <a
-              href='https://github.com/5afe/tutorial-passkeys'
+              href='https://github.com/5afe/safe-passkeys-tutorial'
               style={{ display: 'flex', alignItems: 'center' }}
             >
               View on GitHub{' '}
