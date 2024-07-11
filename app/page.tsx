@@ -7,7 +7,7 @@ import { useState } from 'react'
 import PasskeyList from '../components/PasskeyList'
 import { BUNDLER_URL, CHAIN_NAME, RPC_URL } from '../lib/constants'
 import { getPasskeyFromRawId } from '../lib/passkeys'
-import { executeUSDCTransfer } from '../lib/usdc'
+import { mintNFT } from '../lib/mintNFT'
 
 function Create4337SafeAccount () {
   const [selectedPasskey, setSelectedPasskey] = useState<PasskeyArgType>()
@@ -88,25 +88,12 @@ function Create4337SafeAccount () {
             )}
           </div>
           <div>
-            {' '}
-            <a
-              href='https://faucet.circle.com/'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Get some test USDC for your Safe{' '}
-              <Img
-                src='/external-link.svg'
-                alt='External link'
-                width={14}
-                height={14}
-              />
-            </a>
+            Mint your free NFT!
           </div>
           {selectedPasskey && (
             <button
               onClick={async () =>
-                await executeUSDCTransfer({
+                await mintNFT({
                   signer: selectedPasskey,
                   safeAddress
                 }).then(userOpHash => {
