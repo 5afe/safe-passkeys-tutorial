@@ -1,23 +1,23 @@
-import { PasskeyArgType } from "@safe-global/protocol-kit"
-import { Safe4337Pack } from "@safe-global/relay-kit"
-import { encodeFunctionData } from "viem"
+import { PasskeyArgType } from '@safe-global/protocol-kit'
+import { Safe4337Pack } from '@safe-global/relay-kit'
+import { encodeFunctionData } from 'viem'
 import {
   BUNDLER_URL,
+  NFT_ADDRESS,
+  PAYMASTER_ADDRESS,
   PAYMASTER_URL,
-  RPC_URL,
-  XANDER_BLAZE_NFT_ADDRESS,
-  paymasterAddress,
-} from "./constants"
+  RPC_URL
+} from './constants'
 
 const paymasterOptions = {
   isSponsored: true,
-  paymasterAddress,
-  paymasterUrl: PAYMASTER_URL,
+  paymasterAddress: PAYMASTER_ADDRESS,
+  paymasterUrl: PAYMASTER_URL
 }
 
 /**
  * Mint an NFT.
- * @param {PasskeyArgType} signer - Signer object with rawId and publicKey.
+ * @param {PasskeyArgType} signer - Signer object with rawId and coordinates.
  * @param {string} safeAddress - Safe address.
  * @returns {Promise<void>}
  * @throws {Error} If the operation fails.
@@ -43,9 +43,9 @@ export const mintNFT = async ({
   })
 
   const mintNFTTransaction = {
-    to: XANDER_BLAZE_NFT_ADDRESS,
+    to: NFT_ADDRESS,
     data: encodeSafeMintData(safeAddress),
-    value: "0",
+    value: '0',
   }
 
   const safeOperation = await safe4337Pack.createTransaction({
@@ -56,7 +56,7 @@ export const mintNFT = async ({
     safeOperation
   )
 
-  console.log("SafeOperation", signedSafeOperation)
+  console.log('SafeOperation', signedSafeOperation)
 
   // 4) Execute SafeOperation
   const userOperationHash = await safe4337Pack.executeTransaction({
@@ -82,21 +82,21 @@ export function encodeSafeMintData(
         constant: false,
         inputs: [
           {
-            name: "to",
-            type: "address",
+            name: 'to',
+            type: 'address',
           },
           {
-            name: "tokenId",
-            type: "uint256",
+            name: 'tokenId',
+            type: 'uint256',
           },
         ],
-        name: "safeMint",
+        name: 'safeMint',
         payable: false,
-        stateMutability: "nonpayable",
-        type: "function",
+        stateMutability: 'nonpayable',
+        type: 'function',
       },
     ],
-    functionName: "safeMint",
+    functionName: 'safeMint',
     args: [to, tokenId],
   })
 }
