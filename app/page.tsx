@@ -1,27 +1,27 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { PasskeyArgType } from "@safe-global/protocol-kit";
-import type { Theme } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/material/styles";
+import type { Theme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
+import { PasskeyArgType } from '@safe-global/protocol-kit'
+import { useState } from 'react'
 
-import SafeThemeProvider from "../components/SafeThemeProvider";
-import { createPasskey, storePasskeyInLocalStorage } from "../lib/passkeys";
-import LoginWithPasskey from "@/components/LoginWithPasskey";
-import SafeAccountDetails from "@/components/SafeAccountDetails";
+import LoginWithPasskey from '@/components/LoginWithPasskey'
+import SafeAccountDetails from '@/components/SafeAccountDetails'
+import SafeThemeProvider from '../components/SafeThemeProvider'
+import { createPasskey, storePasskeyInLocalStorage } from '../lib/passkeys'
 
 function Create4337SafeAccount() {
-  const [selectedPasskey, setSelectedPasskey] = useState<PasskeyArgType>();
+  const [selectedPasskey, setSelectedPasskey] = useState<PasskeyArgType>()
 
   async function handleCreatePasskey() {
-    const passkey = await createPasskey();
+    const passkey = await createPasskey()
 
-    storePasskeyInLocalStorage(passkey);
-    setSelectedPasskey(passkey);
+    storePasskeyInLocalStorage(passkey)
+    setSelectedPasskey(passkey)
   }
 
   async function handleSelectPasskey(passkey: PasskeyArgType) {
-    setSelectedPasskey(passkey);
+    setSelectedPasskey(passkey)
   }
 
   return (
@@ -39,7 +39,7 @@ function Create4337SafeAccount() {
         </ThemeProvider>
       )}
     </SafeThemeProvider>
-  );
+  )
 }
 
-export default Create4337SafeAccount;
+export default Create4337SafeAccount

@@ -1,9 +1,8 @@
-import { type FC } from 'react';
-import { type Theme, ThemeProvider } from '@mui/material';
-import { alpha } from '@mui/material';
-import type { Shadows } from '@mui/material/styles';
-import { createTheme } from '@mui/material/styles';
-import type { TypographyOptions } from '@mui/material/styles/createTypography';
+import { ThemeProvider, alpha, type Theme } from '@mui/material'
+import type { Shadows } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles'
+import type { TypographyOptions } from '@mui/material/styles/createTypography'
+import { type FC } from 'react'
 
 // This component is necessary to make the theme available in the library components
 // Is not enough wrapping the client app with the regular ThemeProvider as the library components
@@ -11,81 +10,81 @@ import type { TypographyOptions } from '@mui/material/styles/createTypography';
 // https://github.com/mui/material-ui/issues/32806
 // https://stackoverflow.com/questions/69072004/material-ui-theme-not-working-in-shared-component
 type SafeThemeProviderProps = {
-  children: (safeTheme: Theme) => JSX.Element;
-};
+  children: (safeTheme: Theme) => JSX.Element
+}
 
 const SafeThemeProvider: FC<SafeThemeProviderProps> = ({ children }) => {
-  const theme = createSafeTheme();
+  const theme = createSafeTheme()
 
-  return <ThemeProvider theme={theme}>{children(theme)}</ThemeProvider>;
-};
+  return <ThemeProvider theme={theme}>{children(theme)}</ThemeProvider>
+}
 
-export default SafeThemeProvider;
+export default SafeThemeProvider
 
-export const base = 8;
+export const base = 8
 
-declare module "@mui/material/styles" {
+declare module '@mui/material/styles' {
   // Custom color palettes
   export interface Palette {
-    border: Palette["primary"];
-    logo: Palette["primary"];
-    backdrop: Palette["primary"];
-    static: Palette["primary"];
+    border: Palette['primary']
+    logo: Palette['primary']
+    backdrop: Palette['primary']
+    static: Palette['primary']
   }
   export interface PaletteOptions {
-    border: PaletteOptions["primary"];
-    logo: PaletteOptions["primary"];
-    backdrop: PaletteOptions["primary"];
-    static: PaletteOptions["primary"];
+    border: PaletteOptions['primary']
+    logo: PaletteOptions['primary']
+    backdrop: PaletteOptions['primary']
+    static: PaletteOptions['primary']
   }
 
   export interface TypeBackground {
-    main: string;
-    light: string;
+    main: string
+    light: string
   }
 
   // Custom color properties
   export interface PaletteColor {
-    background?: string;
+    background?: string
   }
   export interface SimplePaletteColorOptions {
-    background?: string;
+    background?: string
   }
 }
 
-declare module "@mui/material/SvgIcon" {
+declare module '@mui/material/SvgIcon' {
   export interface SvgIconPropsColorOverrides {
-    border: unknown;
+    border: unknown
   }
 }
 
-declare module "@mui/material/Button" {
+declare module '@mui/material/Button' {
   export interface ButtonPropsSizeOverrides {
-    stretched: true;
+    stretched: true
   }
 
   export interface ButtonPropsColorOverrides {
-    background: true;
+    background: true
   }
   export interface ButtonPropsVariantOverrides {
-    danger: true;
+    danger: true
   }
 }
 
-declare module "@mui/material/IconButton" {
+declare module '@mui/material/IconButton' {
   export interface IconButtonPropsColorOverrides {
-    border: true;
+    border: true
   }
 }
 
 const createSafeTheme = (): Theme => {
-  const isDarkMode = true;
-  const colors = darkPalette;
-  const shadowColor = colors.primary.light;
+  const isDarkMode = true
+  const colors = darkPalette
+  const shadowColor = colors.primary.light
 
   return createTheme({
     palette: {
-      mode: isDarkMode ? "dark" : "light",
+      mode: isDarkMode ? 'dark' : 'light',
       ...colors,
     },
     spacing: base,
@@ -93,7 +92,7 @@ const createSafeTheme = (): Theme => {
       borderRadius: 6,
     },
     shadows: [
-      "none",
+      'none',
       isDarkMode
         ? `0 0 2px ${shadowColor}`
         : `0 1px 4px ${shadowColor}0a, 0 4px 10px ${shadowColor}14`,
@@ -106,7 +105,7 @@ const createSafeTheme = (): Theme => {
       isDarkMode
         ? `0 0 2px ${shadowColor}`
         : `0 8px 32px ${shadowColor}0a, 0 24px 60px ${shadowColor}14`,
-      ...Array(20).fill("none"),
+      ...Array(20).fill('none'),
     ] as Shadows,
     typography,
     components: {
@@ -121,17 +120,17 @@ const createSafeTheme = (): Theme => {
       MuiButton: {
         variants: [
           {
-            props: { size: "stretched" },
+            props: { size: 'stretched' },
             style: {
-              padding: "12px 48px",
+              padding: '12px 48px',
             },
           },
           {
-            props: { variant: "danger" },
+            props: { variant: 'danger' },
             style: ({ theme }) => ({
               backgroundColor: theme.palette.error.background,
               color: theme.palette.error.main,
-              "&:hover": {
+              '&:hover': {
                 color: theme.palette.error.dark,
                 backgroundColor: theme.palette.error.light,
               },
@@ -140,74 +139,74 @@ const createSafeTheme = (): Theme => {
         ],
         styleOverrides: {
           sizeSmall: {
-            fontSize: "14px",
-            padding: "8px 24px",
+            fontSize: '14px',
+            padding: '8px 24px',
           },
           sizeMedium: {
-            fontSize: "16px",
-            padding: "12px 24px",
+            fontSize: '16px',
+            padding: '12px 24px',
           },
           root: ({ theme }) => ({
             borderRadius: theme.shape.borderRadius,
-            fontWeight: "bold",
+            fontWeight: 'bold',
             lineHeight: 1.25,
             borderColor: theme.palette.primary.main,
-            textTransform: "none",
-            "&:hover": {
-              boxShadow: "none",
+            textTransform: 'none',
+            '&:hover': {
+              boxShadow: 'none',
             },
           }),
           outlined: {
-            border: "2px solid",
-            "&:hover": {
-              border: "2px solid",
+            border: '2px solid',
+            '&:hover': {
+              border: '2px solid',
             },
           },
-          sizeLarge: { fontSize: "16px" },
+          sizeLarge: { fontSize: '16px' },
         },
       },
       MuiAccordion: {
         variants: [
           {
-            props: { variant: "elevation" },
+            props: { variant: 'elevation' },
             style: ({ theme }) => ({
-              border: "none",
-              boxShadow: "0",
-              "&:not(:last-of-type)": {
-                borderRadius: "0 !important",
+              border: 'none',
+              boxShadow: '0',
+              '&:not(:last-of-type)': {
+                borderRadius: '0 !important',
                 borderBottom: `1px solid ${theme.palette.border.light}`,
               },
-              "&:last-of-type": {
-                borderBottomLeftRadius: "8px",
+              '&:last-of-type': {
+                borderBottomLeftRadius: '8px',
               },
             }),
           },
         ],
         styleOverrides: {
           root: ({ theme }) => ({
-            transition: "background 0.2s, border 0.2s",
+            transition: 'background 0.2s, border 0.2s',
             borderRadius: theme.shape.borderRadius,
             border: `1px solid ${theme.palette.border.light}`,
-            overflow: "hidden",
+            overflow: 'hidden',
 
-            "&::before": {
-              content: "none",
+            '&::before': {
+              content: 'none',
             },
 
-            "&:hover": {
+            '&:hover': {
               borderColor: theme.palette.secondary.light,
             },
 
-            "&:hover > .MuiAccordionSummary-root": {
+            '&:hover > .MuiAccordionSummary-root': {
               background: theme.palette.background.light,
             },
 
-            "&.Mui-expanded": {
+            '&.Mui-expanded': {
               margin: 0,
               borderColor: theme.palette.secondary.light,
             },
 
-            "&.Mui-expanded > .MuiAccordionSummary-root": {
+            '&.Mui-expanded > .MuiAccordionSummary-root': {
               background: theme.palette.background.light,
             },
           }),
@@ -216,13 +215,13 @@ const createSafeTheme = (): Theme => {
       MuiAccordionSummary: {
         styleOverrides: {
           root: {
-            "&.Mui-expanded": {
-              minHeight: "48px",
+            '&.Mui-expanded': {
+              minHeight: '48px',
             },
           },
           content: {
-            "&.Mui-expanded": {
-              margin: "12px 0",
+            '&.Mui-expanded': {
+              margin: '12px 0',
             },
           },
         },
@@ -238,9 +237,9 @@ const createSafeTheme = (): Theme => {
         styleOverrides: {
           root: ({ theme }) => ({
             borderRadius: theme.shape.borderRadius,
-            boxSizing: "border-box",
-            border: "2px solid transparent",
-            boxShadow: "none",
+            boxSizing: 'border-box',
+            border: '2px solid transparent',
+            boxShadow: 'none',
           }),
         },
       },
@@ -274,7 +273,7 @@ const createSafeTheme = (): Theme => {
           }),
           root: ({ theme }) => ({
             borderRadius: theme.shape.borderRadius,
-            backgroundImage: "none",
+            backgroundImage: 'none',
           }),
         },
       },
@@ -284,86 +283,86 @@ const createSafeTheme = (): Theme => {
         },
         styleOverrides: {
           paper: {
-            overflow: "visible",
+            overflow: 'visible',
           },
         },
       },
       MuiIconButton: {
         styleOverrides: {
           sizeSmall: {
-            padding: "4px",
+            padding: '4px',
           },
         },
       },
       MuiToggleButton: {
         styleOverrides: {
           root: {
-            textTransform: "none",
+            textTransform: 'none',
           },
         },
       },
       MuiAlert: {
         styleOverrides: {
           standardError: ({ theme }) => ({
-            "& .MuiAlert-icon": {
+            '& .MuiAlert-icon': {
               color: theme.palette.error.main,
             },
-            "&.MuiPaper-root": {
+            '&.MuiPaper-root': {
               backgroundColor: theme.palette.error.background,
             },
             border: `1px solid ${theme.palette.error.main}`,
           }),
           standardInfo: ({ theme }) => ({
-            "& .MuiAlert-icon": {
+            '& .MuiAlert-icon': {
               color: theme.palette.info.main,
             },
-            "&.MuiPaper-root": {
+            '&.MuiPaper-root': {
               backgroundColor: theme.palette.info.background,
             },
             border: `1px solid ${theme.palette.info.main}`,
           }),
           standardSuccess: ({ theme }) => ({
-            "& .MuiAlert-icon": {
+            '& .MuiAlert-icon': {
               color: theme.palette.success.main,
             },
-            "&.MuiPaper-root": {
+            '&.MuiPaper-root': {
               backgroundColor: theme.palette.success.background,
             },
             border: `1px solid ${theme.palette.success.main}`,
           }),
           standardWarning: ({ theme }) => ({
-            "& .MuiAlert-icon": {
+            '& .MuiAlert-icon': {
               color: theme.palette.warning.main,
             },
-            "&.MuiPaper-root": {
+            '&.MuiPaper-root': {
               backgroundColor: theme.palette.warning.background,
             },
             border: `1px solid ${theme.palette.warning.main}`,
           }),
           root: ({ theme }) => ({
             color: theme.palette.text.primary,
-            padding: "12px 16px",
+            padding: '12px 16px',
           }),
         },
       },
       MuiTableHead: {
         styleOverrides: {
           root: ({ theme }) => ({
-            "& .MuiTableCell-root": {
+            '& .MuiTableCell-root': {
               borderBottom: `1px solid ${theme.palette.border.light}`,
             },
 
-            [theme.breakpoints.down("sm")]: {
-              "& .MuiTableCell-root:first-of-type": {
+            [theme.breakpoints.down('sm')]: {
+              '& .MuiTableCell-root:first-of-type': {
                 paddingRight: theme.spacing(1),
               },
 
-              "& .MuiTableCell-root:not(:first-of-type):not(:last-of-type)": {
+              '& .MuiTableCell-root:not(:first-of-type):not(:last-of-type)': {
                 paddingLeft: theme.spacing(1),
                 paddingRight: theme.spacing(1),
               },
 
-              "& .MuiTableCell-root:last-of-type": {
+              '& .MuiTableCell-root:last-of-type': {
                 paddingLeft: theme.spacing(1),
               },
             },
@@ -373,38 +372,38 @@ const createSafeTheme = (): Theme => {
       MuiTableBody: {
         styleOverrides: {
           root: ({ theme }) => ({
-            "& .MuiTableCell-root": {
+            '& .MuiTableCell-root': {
               paddingTop: theme.spacing(1),
               paddingBottom: theme.spacing(1),
-              borderBottom: "none",
+              borderBottom: 'none',
             },
 
-            [theme.breakpoints.down("sm")]: {
-              "& .MuiTableCell-root:first-of-type": {
+            [theme.breakpoints.down('sm')]: {
+              '& .MuiTableCell-root:first-of-type': {
                 paddingRight: theme.spacing(1),
               },
 
-              "& .MuiTableCell-root:not(:first-of-type):not(:last-of-type)": {
+              '& .MuiTableCell-root:not(:first-of-type):not(:last-of-type)': {
                 paddingLeft: theme.spacing(1),
                 paddingRight: theme.spacing(1),
               },
 
-              "& .MuiTableCell-root:last-of-type": {
+              '& .MuiTableCell-root:last-of-type': {
                 paddingLeft: theme.spacing(1),
               },
             },
 
-            "& .MuiTableRow-root": {
-              transition: "background-color 0.2s",
-              "&:not(:last-of-type)": {
+            '& .MuiTableRow-root': {
+              transition: 'background-color 0.2s',
+              '&:not(:last-of-type)': {
                 borderBottom: `1px solid ${theme.palette.border.light}`,
               },
             },
 
-            "& .MuiTableRow-root:hover": {
+            '& .MuiTableRow-root:hover': {
               backgroundColor: theme.palette.background.light,
             },
-            "& .MuiTableRow-root.Mui-selected": {
+            '& .MuiTableRow-root.Mui-selected': {
               backgroundColor: theme.palette.background.light,
             },
           }),
@@ -430,8 +429,8 @@ const createSafeTheme = (): Theme => {
       MuiSvgIcon: {
         styleOverrides: {
           fontSizeSmall: {
-            width: "1rem",
-            height: "1rem",
+            width: '1rem',
+            height: '1rem',
           },
         },
       },
@@ -440,10 +439,10 @@ const createSafeTheme = (): Theme => {
           root: ({ theme }) => ({
             borderRadius: 4,
             backgroundColor: theme.palette.background.paper,
-            border: "1px solid transparent",
-            transition: "border-color 0.2s",
+            border: '1px solid transparent',
+            transition: 'border-color 0.2s',
 
-            "&:hover, &:focus, &.Mui-focused": {
+            '&:hover, &:focus, &.Mui-focused': {
               backgroundColor: theme.palette.background.paper,
               borderColor: theme.palette.primary.main,
             },
@@ -454,8 +453,8 @@ const createSafeTheme = (): Theme => {
         defaultProps: {
           MenuProps: {
             sx: {
-              "& .MuiPaper-root": {
-                overflow: "auto",
+              '& .MuiPaper-root': {
+                overflow: 'auto',
               },
             },
           },
@@ -467,7 +466,7 @@ const createSafeTheme = (): Theme => {
             ...theme.typography.body2,
             color: theme.palette.background.main,
             backgroundColor: theme.palette.text.primary,
-            "& .MuiLink-root": {
+            '& .MuiLink-root': {
               color: isDarkMode
                 ? theme.palette.background.main
                 : theme.palette.secondary.main,
@@ -475,7 +474,7 @@ const createSafeTheme = (): Theme => {
                 ? theme.palette.background.main
                 : theme.palette.secondary.main,
             },
-            "& .MuiLink-root:hover": {
+            '& .MuiLink-root:hover': {
               color: isDarkMode
                 ? theme.palette.text.secondary
                 : theme.palette.secondary.light,
@@ -495,12 +494,12 @@ const createSafeTheme = (): Theme => {
       },
       MuiSwitch: {
         defaultProps: {
-          color: isDarkMode ? undefined : "success",
+          color: isDarkMode ? undefined : 'success',
         },
         styleOverrides: {
           thumb: () => ({
             boxShadow:
-              "0px 2px 6px -1px rgba(0, 0, 0, 0.2), 0px 1px 4px rgba(0, 0, 0, 0.14), 0px 1px 4px rgba(0, 0, 0, 0.14)",
+              '0px 2px 6px -1px rgba(0, 0, 0, 0.2), 0px 1px 4px rgba(0, 0, 0, 0.14), 0px 1px 4px rgba(0, 0, 0, 0.14)',
           }),
         },
       },
@@ -508,7 +507,7 @@ const createSafeTheme = (): Theme => {
         styleOverrides: {
           root: ({ theme }) => ({
             fontWeight: 700,
-            "&:hover": {
+            '&:hover': {
               color: theme.palette.primary.light,
             },
           }),
@@ -522,116 +521,116 @@ const createSafeTheme = (): Theme => {
         },
       },
     },
-  });
-};
+  })
+}
 
-const safeFontFamily = "DM Sans, sans-serif";
+const safeFontFamily = 'DM Sans, sans-serif'
 
 const typography: TypographyOptions = {
   fontFamily: safeFontFamily,
   h1: {
-    fontSize: "32px",
-    lineHeight: "36px",
+    fontSize: '32px',
+    lineHeight: '36px',
     fontWeight: 700,
   },
   h2: {
-    fontSize: "27px",
-    lineHeight: "34px",
+    fontSize: '27px',
+    lineHeight: '34px',
     fontWeight: 700,
   },
   h3: {
-    fontSize: "24px",
-    lineHeight: "30px",
+    fontSize: '24px',
+    lineHeight: '30px',
   },
   h4: {
-    fontSize: "20px",
-    lineHeight: "26px",
+    fontSize: '20px',
+    lineHeight: '26px',
   },
   h5: {
-    fontSize: "16px",
+    fontSize: '16px',
     fontWeight: 700,
   },
   body1: {
-    fontSize: "16px",
-    lineHeight: "22px",
+    fontSize: '16px',
+    lineHeight: '22px',
   },
   body2: {
-    fontSize: "14px",
-    lineHeight: "20px",
+    fontSize: '14px',
+    lineHeight: '20px',
   },
   caption: {
-    fontSize: "12px",
-    lineHeight: "16px",
-    letterSpacing: "0.4px",
+    fontSize: '12px',
+    lineHeight: '16px',
+    letterSpacing: '0.4px',
   },
   overline: {
-    fontSize: "11px",
-    lineHeight: "14px",
-    textTransform: "uppercase",
-    letterSpacing: "1px",
+    fontSize: '11px',
+    lineHeight: '14px',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
   },
-};
+}
 
 const darkPalette = {
   text: {
-    primary: "#FFFFFF",
-    secondary: "#636669",
-    disabled: "#636669",
+    primary: '#FFFFFF',
+    secondary: '#636669',
+    disabled: '#636669',
   },
   primary: {
-    dark: "#0cb259",
-    main: "#12FF80",
-    light: "#A1A3A7",
+    dark: '#0cb259',
+    main: '#12FF80',
+    light: '#A1A3A7',
   },
   secondary: {
-    dark: "#636669",
-    main: "#FFFFFF",
-    light: "#12FF80",
-    background: "#1B2A22",
+    dark: '#636669',
+    main: '#FFFFFF',
+    light: '#12FF80',
+    background: '#1B2A22',
   },
   border: {
-    main: "#636669",
-    light: "#303033",
-    background: "#121312",
+    main: '#636669',
+    light: '#303033',
+    background: '#121312',
   },
   error: {
-    dark: "#AC2C3B",
-    main: "#FF5F72",
-    light: "#FFB4BD",
-    background: "#2F2527",
+    dark: '#AC2C3B',
+    main: '#FF5F72',
+    light: '#FFB4BD',
+    background: '#2F2527',
   },
   success: {
-    dark: "#028D4C",
-    main: "#00B460",
-    light: "#81C784",
-    background: "#1F2920",
+    dark: '#028D4C',
+    main: '#00B460',
+    light: '#81C784',
+    background: '#1F2920',
   },
   info: {
-    dark: "#52BFDC",
-    main: "#5FDDFF",
-    light: "#B7F0FF",
-    background: "#19252C",
+    dark: '#52BFDC',
+    main: '#5FDDFF',
+    light: '#B7F0FF',
+    background: '#19252C',
   },
   warning: {
-    dark: "#C04C32",
-    main: "#FF8061",
-    light: "#FFBC9F",
-    background: "#2F2318",
+    dark: '#C04C32',
+    main: '#FF8061',
+    light: '#FFBC9F',
+    background: '#2F2318',
   },
   background: {
-    default: "#121312",
-    main: "#121312",
-    paper: "#1C1C1C",
-    light: "#1B2A22",
+    default: '#121312',
+    main: '#121312',
+    paper: '#1C1C1C',
+    light: '#1B2A22',
   },
   backdrop: {
-    main: "#636669",
+    main: '#636669',
   },
   logo: {
-    main: "#FFFFFF",
-    background: "#303033",
+    main: '#FFFFFF',
+    background: '#303033',
   },
   static: {
-    main: "#121312",
+    main: '#121312',
   },
-};
+}
