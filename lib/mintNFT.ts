@@ -23,6 +23,7 @@ const paymasterOptions = {
  * @throws {Error} If the operation fails.
  */
 export const mintNFT = async (passkey: PasskeyArgType, safeAddress: string) => {
+  // 1) Initialize Safe4337Pack
   const safe4337Pack = await Safe4337Pack.init({
     provider: RPC_URL,
     signer: passkey,
@@ -36,6 +37,7 @@ export const mintNFT = async (passkey: PasskeyArgType, safeAddress: string) => {
     }
   })
 
+  // 2) Create SafeOperation
   const mintNFTTransaction = {
     to: NFT_ADDRESS,
     data: encodeSafeMintData(safeAddress),
@@ -46,6 +48,7 @@ export const mintNFT = async (passkey: PasskeyArgType, safeAddress: string) => {
     transactions: [mintNFTTransaction]
   })
 
+  // 3) Sign SafeOperation
   const signedSafeOperation = await safe4337Pack.signSafeOperation(
     safeOperation
   )
