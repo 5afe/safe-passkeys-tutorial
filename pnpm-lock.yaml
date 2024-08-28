@@ -18,11 +18,11 @@ dependencies:
     specifier: ^5.16.0
     version: 5.16.0(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@safe-global/protocol-kit':
-    specifier: 4.1.0
-    version: 4.1.0(typescript@5.5.3)
+    specifier: 4.1.0-alpha.1
+    version: 4.1.0-alpha.1(typescript@5.5.3)
   '@safe-global/relay-kit':
-    specifier: 3.1.0
-    version: 3.1.0(typescript@5.5.3)
+    specifier: 3.1.0-alpha.1
+    version: 3.1.0-alpha.1(typescript@5.5.3)
   next:
     specifier: 14.2.3
     version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
@@ -798,13 +798,12 @@ packages:
     resolution: {integrity: sha512-qC/xYId4NMebE6w/V33Fh9gWxLgURiNYgVNObbJl2LZv0GUUItCcCqC5axQSwRaAgaxl2mELq1rMzlswaQ0Zxg==}
     dev: true
 
-  /@safe-global/protocol-kit@4.1.0(typescript@5.5.3):
-    resolution: {integrity: sha512-WAGXEn6UvKGlEYNqcWUasLZ4240sVWBg8T2SsfHoTs8Im0x2i48CNNZ5Mw9x+oKqhWs/Q9frNG6JcycN19LDRw==}
+  /@safe-global/protocol-kit@4.1.0-alpha.1(typescript@5.5.3):
+    resolution: {integrity: sha512-fYE+Ln/Y8j/SviBohJmXnHcLORnWu4fSM3YBAXnA770Iy6EfZv/ntFwUvzRcX1FD9gMd1FLgmRm013BkUF4AfA==}
     dependencies:
       '@noble/hashes': 1.4.0
-      '@safe-global/safe-core-sdk-types': 5.1.0(typescript@5.5.3)
-      '@safe-global/safe-deployments': 1.37.3
-      '@safe-global/safe-modules-deployments': 2.2.1
+      '@safe-global/safe-core-sdk-types': 5.1.0-alpha.1(typescript@5.5.3)
+      '@safe-global/safe-deployments': 1.37.1
       abitype: 1.0.5(typescript@5.5.3)
       ethereumjs-util: 7.1.5
       ethers: 6.13.1
@@ -816,13 +815,13 @@ packages:
       - zod
     dev: false
 
-  /@safe-global/relay-kit@3.1.0(typescript@5.5.3):
-    resolution: {integrity: sha512-1kXAZmuYj0lw9Ab7SmYnhqKC7hSunpemDAVvhtXEM4CfI1pUStn5pGDAyJv0ASzt/xyXqtgtw52G+USz87vMdQ==}
+  /@safe-global/relay-kit@3.1.0-alpha.1(typescript@5.5.3):
+    resolution: {integrity: sha512-jnLL1ruK/OtKUZ7dv3LzGGkn7kZrEMTSvFzr2f7KHeO11p58IFS6FWULs03zkvRrf+JyarZkIIvjV6hZwEuKfQ==}
     dependencies:
       '@gelatonetwork/relay-sdk': 5.5.6
-      '@safe-global/protocol-kit': 4.1.0(typescript@5.5.3)
-      '@safe-global/safe-core-sdk-types': 5.1.0(typescript@5.5.3)
-      '@safe-global/safe-modules-deployments': 2.2.1
+      '@safe-global/protocol-kit': 4.1.0-alpha.1(typescript@5.5.3)
+      '@safe-global/safe-core-sdk-types': 5.1.0-alpha.1(typescript@5.5.3)
+      '@safe-global/safe-modules-deployments': 2.2.0
       ethers: 6.13.1
     transitivePeerDependencies:
       - bufferutil
@@ -832,8 +831,8 @@ packages:
       - zod
     dev: false
 
-  /@safe-global/safe-core-sdk-types@5.1.0(typescript@5.5.3):
-    resolution: {integrity: sha512-UzXR4zWmVzux25FcIm4H049QhZZpVpIBL5HE+V0p5gHpArZROL+t24fZmsKUf403CtBxIJM5zZSVQL0nFJi+IQ==}
+  /@safe-global/safe-core-sdk-types@5.1.0-alpha.1(typescript@5.5.3):
+    resolution: {integrity: sha512-Qb8sMCNZuytPbIEHomFIIYP96k67sqp0soqYfswvwSR64T+fy1bvBzNAsZR1iFeryHl8BURegKJjLFONLG4kLg==}
     dependencies:
       abitype: 1.0.5(typescript@5.5.3)
     transitivePeerDependencies:
@@ -841,14 +840,14 @@ packages:
       - zod
     dev: false
 
-  /@safe-global/safe-deployments@1.37.3:
-    resolution: {integrity: sha512-EtbiOJVGe697+GcbHtfo75NYpp+hTlIIBqL2ETPLGoQBHoxo9HWbGX/6ZkVxsZv/NN4nKawyMi+MvpUkH9VXGg==}
+  /@safe-global/safe-deployments@1.37.1:
+    resolution: {integrity: sha512-duCCQghqw9B/MmHPMXlkPpZwyq3T92unWVnwwhiA8alhush2FZ22+x6uF8bQtk/RYJzkpYzV1tPL/VBLt9U9XQ==}
     dependencies:
       semver: 7.6.2
     dev: false
 
-  /@safe-global/safe-modules-deployments@2.2.1:
-    resolution: {integrity: sha512-H0XpusyXVcsTuRsQSq0FoBKqRfhZH87/1DrFEmXXPXmI3fJkvxq3KpTaTTqzcqoIe/J+erwVZQUYNfL68EcvAQ==}
+  /@safe-global/safe-modules-deployments@2.2.0:
+    resolution: {integrity: sha512-ZzNhMf8Xxods3TrY7kSrescnicHQRFH7eYx7TMKqVhxFScEiuYmivQMdV94ziF+Hot0xCcrrFeed657U/oXrJw==}
     dev: false
 
   /@scure/base@1.1.7:
