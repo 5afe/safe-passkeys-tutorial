@@ -1,4 +1,4 @@
-import { ThemeProvider, alpha, type Theme } from '@mui/material'
+import { ThemeProvider, useMediaQuery, type Theme } from '@mui/material'
 import type { Shadows } from '@mui/material/styles'
 import { createTheme } from '@mui/material/styles'
 import type { TypographyOptions } from '@mui/material/styles/createTypography'
@@ -14,21 +14,22 @@ type SafeThemeProviderProps = {
 }
 
 const SafeThemeProvider: FC<SafeThemeProviderProps> = ({ children }) => {
-  const theme = createSafeTheme()
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+
+  const theme = createSafeTheme(prefersDarkMode)
 
   return <ThemeProvider theme={theme}>{children(theme)}</ThemeProvider>
 }
 
 export default SafeThemeProvider
 
-const createSafeTheme = (): Theme => {
-  const isDarkMode = true
-  const colors = darkPalette
+const createSafeTheme = (prefersDarkMode: boolean): Theme => {
+  const colors = prefersDarkMode ? darkPalette : lightPalette
   const shadowColor = colors.primary.light
 
   return createTheme({
     palette: {
-      mode: isDarkMode ? 'dark' : 'light',
+      mode: prefersDarkMode ? 'dark' : 'light',
       ...colors
     },
     shape: {
@@ -36,16 +37,16 @@ const createSafeTheme = (): Theme => {
     },
     shadows: [
       'none',
-      isDarkMode
+      prefersDarkMode
         ? `0 0 2px ${shadowColor}`
         : `0 1px 4px ${shadowColor}0a, 0 4px 10px ${shadowColor}14`,
-      isDarkMode
+      prefersDarkMode
         ? `0 0 2px ${shadowColor}`
         : `0 1px 4px ${shadowColor}0a, 0 4px 10px ${shadowColor}14`,
-      isDarkMode
+      prefersDarkMode
         ? `0 0 2px ${shadowColor}`
         : `0 2px 20px ${shadowColor}0a, 0 8px 32px ${shadowColor}14`,
-      isDarkMode
+      prefersDarkMode
         ? `0 0 2px ${shadowColor}`
         : `0 8px 32px ${shadowColor}0a, 0 24px 60px ${shadowColor}14`,
       ...Array(20).fill('none')
@@ -75,6 +76,13 @@ const createSafeTheme = (): Theme => {
             }
           }
         }
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: prefersDarkMode ? 'background.default' : '#eeeeee'
+          }
+        }
       }
     }
   })
@@ -98,6 +106,19 @@ const typography: TypographyOptions = {
 const darkPalette = {
   text: {
     primary: '#FFFFFF',
+    secondary: '#636669',
+    disabled: '#636669'
+  },
+  primary: {
+    dark: '#0cb259',
+    main: '#12FF80',
+    light: '#A1A3A7'
+  }
+}
+
+const lightPalette = {
+  text: {
+    primary: '#000000',
     secondary: '#636669',
     disabled: '#636669'
   },

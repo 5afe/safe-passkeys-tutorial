@@ -1,7 +1,6 @@
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import { Button, Divider, Paper, Stack, Typography } from '@mui/material'
 import { PasskeyArgType } from '@safe-global/protocol-kit'
-import { useState } from 'react'
 import { loadPasskeysFromLocalStorage } from '../lib/passkeys'
 
 type props = {
@@ -9,10 +8,13 @@ type props = {
   handleSelectPasskey: (passkey: PasskeyArgType) => {}
 }
 
-function LoginWithPasskey({ handleCreatePasskey, handleSelectPasskey }: props) {
-
+function LoginWithPasskey ({ handleCreatePasskey, handleSelectPasskey }: props) {
   return (
-    <Paper sx={{ margin: '32px auto 0' }}>
+    <Paper
+      sx={{
+        margin: '32px auto 0'
+      }}
+    >
       <Stack padding={4}>
         <Typography textAlign={'center'} variant='h1' color={'primary'}>
           Use Safe Account via Passkeys
