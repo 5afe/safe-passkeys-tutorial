@@ -10,7 +10,6 @@ type props = {
 }
 
 function LoginWithPasskey({ handleCreatePasskey, handleSelectPasskey }: props) {
-  const [passkeys, setPasskeys] = useState<PasskeyArgType[]>([])
 
   return (
     <Paper sx={{ margin: '32px auto 0' }}>
@@ -58,7 +57,6 @@ function LoginWithPasskey({ handleCreatePasskey, handleSelectPasskey }: props) {
           onClick={async () => {
             const passkeys = loadPasskeysFromLocalStorage()
 
-            setPasskeys(passkeys)
             handleSelectPasskey(passkeys[0])
           }}
         >
